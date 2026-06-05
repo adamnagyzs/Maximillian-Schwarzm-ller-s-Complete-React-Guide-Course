@@ -1,0 +1,3 @@
+Main difference: When state changes, the component function does not re-execute
+So basically you need state, when you want to update the UI, you can't do that with refs
+
