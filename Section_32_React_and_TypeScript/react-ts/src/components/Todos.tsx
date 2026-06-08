@@ -1,12 +1,14 @@
+import Todo from "../models/todo";
+
 type TodosProps = {
-  items: string[];
+  items: Todo[];
 };
 
 const Todos = ({ items }: TodosProps) => {
   return (
     <ul>
       {items.map((item) => (
-        <li key={item}>{item}</li>
+        <li key={item.id}>{item.text}</li>
       ))}
     </ul>
   );
