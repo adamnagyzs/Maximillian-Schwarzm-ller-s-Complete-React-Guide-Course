@@ -5,13 +5,13 @@ class Todo {
 
   constructor(todoText: string) {
     this.text = todoText;
-    this.id = new Date().toISOString();
+    this.id = crypto.randomUUID();
   }
 }
 
 export default Todo;
 
-// with type or interface, both is the same
+// with type or interface, both is the samed
 // export type Todo = {
 //   id: string;
 //   text: string;
