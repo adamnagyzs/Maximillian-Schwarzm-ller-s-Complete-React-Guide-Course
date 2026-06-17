@@ -1,43 +1,40 @@
 import { useActionState } from "react";
 
-function signupAction(prevFormState, formData) {
-  const userName = formData.get("userName");
+function shareOpinionAction(prevState, formData) {
   const title = formData.get("title");
   const body = formData.get("body");
+  const userName = formData.get("userName");
 
-  const errors = {
-    userNameError: null,
-    titleError: null,
-    bodyError: null,
-  };
+  const errors = [];
 
-  if (!userName || userName.length < 5 || userName.length > 16) {
-    errors.userNameError = "Please enter a username between 5-16 characters";
+  if (title.trim().length < 5) {
+    errors.push("Title must be at least five characters long.");
   }
 
-  if (!title || title.trim().length === 0) {
-    errors.titleError = "Please enter a title";
+  if (body.trim().length < 10 || body.trim().length > 300) {
+    errors.push("Opinion must be between 10 and 300 characters long.");
   }
 
-  if (!body || body.trim().length === 0) {
-    errors.bodyError = "Please enter your opinion";
+  if (!userName.trim()) {
+    errors.push("Please provide your name.");
   }
 
-  if (errors.userNameError || errors.titleError || errors.bodyError) {
+  if (errors.length > 0) {
     return {
       errors,
-      enteredValues: { userName, title, body },
+      enteredValues: {
+        title,
+        body,
+        userName,
+      },
     };
   }
 
-  return {
-    errors: null,
-    enteredValues: { userName: "", title: "", body: "" },
-  };
+  return { errors: null };
 }
 
 export function NewOpinion() {
-  const [formState, formAction] = useActionState(signupAction, {
+  const [formState, formAction] = useActionState(shareOpinionAction, {
     errors: null,
   });
   return (
@@ -53,9 +50,6 @@ export function NewOpinion() {
               name="userName"
               defaultValue={formState.enteredValues?.userName}
             />
-            {formState.errors?.userNameError && (
-              <div className="errors">{formState.errors.userNameError}</div>
-            )}
           </p>
 
           <p className="control">
@@ -66,9 +60,6 @@ export function NewOpinion() {
               name="title"
               defaultValue={formState.enteredValues?.title}
             />
-            {formState.errors?.titleError && (
-              <div className="errors">{formState.errors.titleError}</div>
-            )}
           </p>
         </div>
         <p className="control">
@@ -79,10 +70,15 @@ export function NewOpinion() {
             rows={5}
             defaultValue={formState.enteredValues?.body}
           ></textarea>
-          {formState.errors?.bodyError && (
-            <div className="errors">{formState.errors.bodyError}</div>
-          )}
         </p>
+
+        {formState.errors && (
+          <ul className="errors">
+            {formState.errors.map((error) => (
+              <li key={error}>{error}</li>
+            ))}
+          </ul>
+        )}
 
         <p className="actions">
           <button type="submit">Submit</button>
