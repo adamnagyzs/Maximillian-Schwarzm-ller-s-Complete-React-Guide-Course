@@ -1,6 +1,20 @@
 {
   "opinions": [
     {
+      "id": 1781705941603,
+      "votes": 1,
+      "userName": "Ádám",
+      "title": "Testing useFormStatus",
+      "body": "Just testing the useFormStatus hook, nothing to see here..."
+    },
+    {
+      "id": 1781704723832,
+      "votes": 0,
+      "userName": "Ádám",
+      "title": "React is great!",
+      "body": "Everyone should learn React in my opinion..."
+    },
+    {
       "id": 1,
       "userName": "Maximilian Schwarzmüller",
       "title": "Do yourself a favor and learn React!",
