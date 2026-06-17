@@ -63,7 +63,7 @@ export function OpinionsContextProvider({ children }) {
     const response = await fetch(
       "http://localhost:3000/opinions/" + id + "/downvote",
       {
-        method: POST,
+        method: "POST",
       },
     );
 
