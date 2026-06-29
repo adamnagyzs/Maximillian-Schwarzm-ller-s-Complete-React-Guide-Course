@@ -45,7 +45,13 @@ export const sendCartData = (cart) => {
     const sendRequest = async () => {
       const response = await fetch(
         "https://dummy-eaaec-default-rtdb.europe-west1.firebasedatabase.app/cart.json",
-        { method: "PUT", body: JSON.stringify(cart) }, // "PUT" method overrides the existing data
+        {
+          method: "PUT",
+          body: JSON.stringify({
+            items: cart.items,
+            totalQuantity: cart.totalQuantity,
+          }),
+        }, // "PUT" method overrides the existing data
       );
 
       if (!response.ok) {
