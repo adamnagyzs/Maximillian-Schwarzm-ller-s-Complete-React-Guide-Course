@@ -1,25 +1,23 @@
-import { useLoaderData } from "react-router-dom";
+import { Suspense } from "react";
+import { useLoaderData, Await } from "react-router-dom";
 
 import EventsList from "../components/EventsList";
 
 function EventsPage() {
-  const data = useLoaderData();
-
-  // if (data.isError) {
-  //   return <p>{data.message}</p>;
-  // }
-  const events = data.events;
+  const { events } = useLoaderData();
 
   return (
-    <>
-      <EventsList events={events} />
-    </>
+    <Suspense fallback={<p style={{ textAlign: "center" }}>Loading...</p>}>
+      <Await resolve={events}>
+        {(loadedEvents) => <EventsList events={loadedEvents} />}
+      </Await>
+    </Suspense>
   );
 }
 
 export default EventsPage;
 
-export async function loader() {
+async function loadEvents() {
   // this executes in the browser, not in backend server
   // you can't use hooks here, because it isn't a react component, but any other browser features can be used
   const response = await fetch("http://localhost:8080/events");
@@ -30,8 +28,13 @@ export async function loader() {
       status: 500,
     }); // closest errorElement will be rendered
   } else {
-    // const resData = await response.json();
-    // return resData.events;
-    return response; // you can do it like this with useLoaderData()
+    const resData = await response.json();
+    return resData.events;
   }
+}
+
+export function loader() {
+  return {
+    events: loadEvents(),
+  };
 }
