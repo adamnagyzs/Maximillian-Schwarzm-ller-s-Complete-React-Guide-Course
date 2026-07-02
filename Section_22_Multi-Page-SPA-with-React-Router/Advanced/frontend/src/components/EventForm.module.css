@@ -13,7 +13,9 @@
 .form input,
 .form textarea {
   font: inherit;
+  color: white;
   padding: 0.25rem;
+  background: #3d3b3b;
 }
 
 .actions {
@@ -32,7 +34,7 @@
   border: none;
 }
 
-.actions button[type='button'] {
+.actions button[type="button"] {
   background-color: transparent;
   color: var(--color-gray-300);
 }
@@ -41,6 +43,6 @@
   background-color: var(--color-primary-300);
 }
 
-.actions button[type='button']:hover {
+.actions button[type="button"]:hover {
   background-color: var(--color-gray-800);
 }
