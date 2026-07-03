@@ -15,6 +15,7 @@
   font: inherit;
   padding: 0.25rem;
   background-color: var(--color-gray-700);
+  color: var(--color-gray-200);
 }
 
 .actions {
