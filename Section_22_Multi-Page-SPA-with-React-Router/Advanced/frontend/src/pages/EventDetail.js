@@ -1,6 +1,7 @@
 import { useRouteLoaderData, redirect, Await } from "react-router-dom";
 
 import EventItem from "../components/EventItem";
+import EventsList from "../components/EventsList";
 import { Suspense } from "react";
 
 function EventDetailPage() {
