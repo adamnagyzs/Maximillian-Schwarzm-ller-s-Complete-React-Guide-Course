@@ -22,6 +22,7 @@ export default function EditEvent() {
   const { data, isError, error } = useQuery({
     queryKey: ["events", id],
     queryFn: ({ signal }) => fetchEvent({ signal, id }),
+    staleTime: 10000, // cached data is used without re-fetching if data is less than 10 sec old
   });
 
   //OPTIMISTIC UPDATE
